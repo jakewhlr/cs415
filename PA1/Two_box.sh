@@ -1,2 +1,6 @@
 #!/bin/bash
-srun -n2 -N2 --ntasks-per-node=1 PA1 1000 1
+#SBATCH -n 2
+#SBATCH -N 2
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=00:15:00
+srun PA1 1000 1
