@@ -3,7 +3,7 @@
 #SBATCH --output=output/sequential/sequential.log
 #SBATCH --mail-user=jakewheeler@nevada.unr.edu
 #SBATCH --mail-type=ALL
-#SBATCH --time=00:10:00
+#SBATCH --time=00:20:00
 printf "1,000,000 integers"
 out=$(srun bin/sequential -c -s 1000000 -e 123)
 printf "$out," >> ./output/sequential/sequential.csv && printf " $out s\n"
