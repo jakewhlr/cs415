@@ -112,7 +112,7 @@ void master(int numtasks){
    if(verbosity > 1){
       cout << "Size: " << size << endl;
       cout << "Seed: " << seed << endl;
-      cout << "Number of Buckets: " << numBuckets << endl;
+      cout << "Number of Buckets: " << numtasks << endl;
    }
    int min, max;
    vector<int> random (size);
@@ -120,11 +120,11 @@ void master(int numtasks){
 
    int perProcess = size / numtasks;
    for(int index = 1; index < numtasks; index++){
-      MPI_Send(random[index * perProcess], perProcess, MPI_INT, index, 0, MPI_COMM_WORLD);
+      MPI_Send(&random[index * perProcess], perProcess, MPI_INT, index, 0, MPI_COMM_WORLD);
    }
 }
 
 void slave(int numtasks){
    vector<int> numbers (size / numtasks);
-   MPI_Recv(&vector, size / numtasks, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+   MPI_Recv(&numbers, size / numtasks, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 }
