@@ -44,8 +44,8 @@ int main(int argc, char *argv[]){
    // end MPI boiler plate
 
    int min, max;
-   vector<int> random (size);
-   random = generator(seed, size, &min, &max);
+   vector<int> randgen(size);
+   randgen = generator(seed, size, &min, &max);
    vector<int> buckets[numBuckets];
    vector<int> sorted;
    int perBucket = (max + numBuckets - 1) / numBuckets;
@@ -56,15 +56,15 @@ int main(int argc, char *argv[]){
    if(verbosity > 3){
       cout << "Random: [ ";
       for(int number = 0; number < size; number++)
-         cout << random[number] << " ";
+         cout << randgen[number] << " ";
       cout << "]" << endl;
    }
 
 // bucket placement
    for(int number = 0; number < size; number++){ // for each number
       for(int bucket = 0; bucket < numBuckets; bucket++){ // for each bucket
-         if(random[number] < (bucket + 1) * perBucket){
-            buckets[bucket].push_back(random[number]);
+         if(randgen[number] < (bucket + 1) * perBucket){
+            buckets[bucket].push_back(randgen[number]);
             break;
          }
       }
