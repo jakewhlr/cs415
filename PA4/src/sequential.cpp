@@ -13,16 +13,19 @@ int main(int argc, char* argv[]){
    double product;
    vector<double>* matrixA = readFile(argv[1], &sizeA);
    vector<double>* matrixB = readFile(argv[2], &sizeB);
+   if(sizeA != sizeB){
+      cerr << "Square matrices must be of same size." << endl;
+      return 1;
+   }
    sizeC = sizeA;
    vector<double>* matrixC = new vector<double>[sizeC];
-   for(int Cx = 0; Cx < sizeC; Cx++){
-      for(int Cy = 0; Cy < sizeC; Cy++){
+   for(int Ay = 0; Ay < sizeA; Ay++){
+      for(int Bx = 0; Bx < sizeB; Bx++){
          product = 0;
          for(int Ax = 0; Ax < sizeA; Ax++){
-            product += matrixA[Cy][Ax]*matrixB[Ax][Cy];
+            product += matrixA[Ay][Ax]*matrixB[Ax][Bx];
          }
-
-         matrixC[Cx].push_back(product);
+         matrixC[Ay].push_back(product);
       }
    }
 
