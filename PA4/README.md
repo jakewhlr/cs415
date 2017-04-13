@@ -14,3 +14,10 @@ Two sbatch files will be provided in the root directory, `sequential.sh` and `pa
 , which will run various tests with the sequential implementation and the parallel
 implementation, respectively. The output of these scripts will be stored in `output/sequential/`
 and `output/parallel/`.
+
+#### Command Line arguments  
+The program accepts the following arguments:
+* `-s <int>`, specifies the square size of the matrices to multiply. Defaults to 5
+* `-e <int>`, specifies a seed for the random generation of matrices. Defaults to current time.
+* `-c`, specifies whether this run is used for collecting data, changes output accordingly. Defaults to false.
+* `-v`, specifies level of verbosity, between 0 and 4 `v`'s. Defaults to 0.
