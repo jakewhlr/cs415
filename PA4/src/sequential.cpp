@@ -12,6 +12,8 @@ int size = 5; // -s <int> size of square matrices
 int seed = time(NULL); // -e <int> seed for rng
 bool collectingData = false; // -c collecting data t/f
 int verbosity = 0; // -v level of verbosity
+string fileA = "";
+string fileB = "";
 
 int main(int argc, char* argv[]){
    using namespace std;
@@ -30,11 +32,23 @@ int main(int argc, char* argv[]){
    MPI_Get_processor_name(hostname, &len);
    // end MPI boiler plate
 
+   vector<int>* matrixA;
+   vector<int>* matrixB;
+   vector<int>* matrixC;
+
+   if(!fileA.empty() && !fileB.empty()){
+      int sizeB;
+      matrixA = readFile(fileA, &size);
+      matrixB = readFile(fileB, &sizeB);
+      if(sizeB != size)
+         cerr << "Matrix sizes must be the same." << endl, exit(EXIT_FAILURE);
+   } else{
+      matrixA = generateMatrix(size, seed);
+      matrixB = generateMatrix(size, seed+1);
+   }
+   matrixC = new vector<int>[size];
 
    int product;
-   vector<int>* matrixA = generateMatrix(size, seed);
-   vector<int>* matrixB = generateMatrix(size, seed+1);
-   vector<int>* matrixC = new vector<int>[size];
    clock_t start = clock();
    for(int Ay = 0; Ay < size; Ay++){
       for(int Bx = 0; Bx < size; Bx++){

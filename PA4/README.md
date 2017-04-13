@@ -21,3 +21,14 @@ The program accepts the following arguments:
 * `-e <int>`, specifies a seed for the random generation of matrices. Defaults to current time.
 * `-c`, specifies whether this run is used for collecting data, changes output accordingly. Defaults to false.
 * `-v`, specifies level of verbosity, between 0 and 4 `v`'s. Defaults to 0.
+* `-f <string> <string>`, specifies files for matrix A and matrix B, in the format shown below. Overrides `-s` and `-e`.  
+
+  *Example*: `bin/sequential -vv -s 10 -e 45` , two levels of verbosity with size 10 and seed 45.
+###### `-f` File format
+   A.txt, matrix of size 3.
+   ```shell
+   3  #size
+   1 2 3
+   4 5 6
+   7 8 9
+   ```

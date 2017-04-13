@@ -6,6 +6,8 @@ extern int size;
 extern int seed;
 extern bool collectingData;
 extern int verbosity;
+extern string fileA;
+extern string fileB;
 
 void parseArgs(int argc, char* argv[]){
    using namespace std;
@@ -44,6 +46,16 @@ void parseArgs(int argc, char* argv[]){
                         else
                            cerr << "Incorrect format: -e <int>" << endl, exit(EXIT_FAILURE);
                      break;
+                     case 'f':
+                        if(opt < length)
+                           if(index + 1 < argc){
+                              index++, fileA = argv[index];
+                              if(index + 1 < argc)
+                                 index++, fileB = argv[index];
+                              else
+                                 cerr << "Incorrect format: -f <string> <string>" << endl, exit(EXIT_FAILURE);
+                           } else
+                              cerr << "Incorrect format: -f <string> <string>" << endl, exit(EXIT_FAILURE);
                   }
                }
             }
