@@ -32,9 +32,9 @@ int main(int argc, char* argv[]){
    MPI_Get_processor_name(hostname, &len);
    // end MPI boiler plate
 
-   vector<int>* matrixA;
-   vector<int>* matrixB;
-   vector<int>* matrixC;
+   int** matrixA;
+   int** matrixB;
+   int** matrixC;
 
    if(!fileA.empty() && !fileB.empty()){
       int sizeB;
@@ -46,7 +46,9 @@ int main(int argc, char* argv[]){
       matrixA = generateMatrix(size, seed);
       matrixB = generateMatrix(size, seed+1);
    }
-   matrixC = new vector<int>[size];
+   matrixC = new int*[size];
+   for(int i = 0; i < size; i++)
+      matrixC[i] = new int[size];
 
    int product;
    clock_t start = clock();
@@ -56,7 +58,7 @@ int main(int argc, char* argv[]){
          for(int Ax = 0; Ax < size; Ax++){
             product += matrixA[Ay][Ax]*matrixB[Ax][Bx];
          }
-         matrixC[Ay].push_back(product);
+         matrixC[Ay][Bx] = product;
       }
    }
    clock_t end = clock();
