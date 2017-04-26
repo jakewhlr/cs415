@@ -24,47 +24,59 @@ void parseArgs(int argc, char* argv[]){
             } else{ // short option
                for(int opt = 1; opt < length; opt++){
                   switch(argv[index][opt]){
+
                      case 'v':
-                        if(verbosity < 4)
+                        if(verbosity < 4){
                            verbosity++;
+                        }
                      break;
+
                      case 'c':
                         collectingData = true;
                      break;
+
                      case 's':
-                        if(opt < length) // if s is not last option
-                           if(index + 1 < argc)
+                        if(opt < length){ // if s is not last option
+                           if(index + 1 < argc){
                               index++, size = atoi(argv[index]);
-                           else
+                           } else{
                               cerr << "Incorrect format: -s <int>" << endl, exit(EXIT_FAILURE);
-                        else
+                           }
+                        } else
                            cerr << "Inorrect format: -s <int>" << endl, exit(EXIT_FAILURE);
                      break;
+
                      case 'e':
-                        if(opt < length)
-                           if(index + 1 < argc)
+                        if(opt < length){
+                           if(index + 1 < argc){
                               index++, seed = atoi(argv[index]);
-                           else
+                           } else{
                               cerr << "Incorrect format: -e <int>" << endl, exit(EXIT_FAILURE);
-                        else
+                           }
+                        } else{
                            cerr << "Incorrect format: -e <int>" << endl, exit(EXIT_FAILURE);
+                        }
                      break;
+
                      case 'f':
-                        if(opt < length)
+                        if(opt < length){
                            if(index + 1 < argc){
                               index++, fileA = argv[index];
-                              if(index + 1 < argc)
+                              if(index + 1 < argc){
                                  index++, fileB = argv[index];
+                              }
                               else
                                  cerr << "Incorrect format: -f <string> <string>" << endl, exit(EXIT_FAILURE);
                            } else
                               cerr << "Incorrect format: -f <string> <string>" << endl, exit(EXIT_FAILURE);
+                        }
                   }
                }
             }
          }
       }
    }
-   if(collectingData)
+   if(collectingData){
       verbosity = 0;
+   }
 }

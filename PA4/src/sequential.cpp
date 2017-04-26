@@ -45,20 +45,13 @@ int main(int argc, char* argv[]){
       matrixB = generateMatrix(size, seed+1);
    }
    matrixC = new int*[size];
-   for(int i = 0; i < size; i++)
+   for(int i = 0; i < size; i++){
       matrixC[i] = new int[size];
+   }
 
    int product;
    clock_t start = clock();
-   for(int Ay = 0; Ay < size; Ay++){
-      for(int Bx = 0; Bx < size; Bx++){
-         product = 0;
-         for(int Ax = 0; Ax < size; Ax++){
-            product += matrixA[Ay][Ax]*matrixB[Ax][Bx];
-         }
-         matrixC[Ay][Bx] = product;
-      }
-   }
+   matrixC = matrix_multiply(matrixA, matrixB, size);
    clock_t end = clock();
    double elapsedTime = (double)(end - start) / CLOCKS_PER_SEC;
    if(verbosity > 2){
@@ -71,8 +64,21 @@ int main(int argc, char* argv[]){
       cout << "Matrix C: " << endl;
       printMatrix(size, matrixC);
    }
-   if(verbosity > 0)
+   if(verbosity > 0){
       cout << "Elapsed Time: " << elapsedTime << " s" << endl;
-   if(collectingData)
+   }
+   if(collectingData){
       cout << elapsedTime;
+   }
+
+   for(int i = 0; i < size; i++){
+      delete[] matrixA[i];
+      delete[] matrixB[i];
+      delete[] matrixC[i];
+   }
+   delete[] matrixA;
+   delete[] matrixB;
+   delete[] matrixC;
+
+   return 0;
 }

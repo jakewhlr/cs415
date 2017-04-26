@@ -1,7 +1,5 @@
 #include<iostream>
 #include<fstream>
-// #include<string>
-// #include<vector>
 #include<cstdlib>
 
 using namespace std;
@@ -14,8 +12,9 @@ using namespace std;
 int** generateMatrix(int size, int seed){
    srand(seed); // initialize RNG
    int** output = new int*[size]; // allocate output
-   for(int i = 0; i < size; i++)
+   for(int i = 0; i < size; i++){
       output[i] = new int[size];
+   }
    for(int n = 0; n < size; n++){
       for(int m = 0; m < size; m++){
          output[n][m] = (random() % 1000); // push random int
@@ -41,8 +40,9 @@ int** readFile(string filename, int* size){
    int n = 0;
    int m = 0;
    output = new int*[*size];
-   for(int i = 0; i < *size; i++)
+   for(int i = 0; i < *size; i++){
       output[i] = new int[*size];
+   }
    for(n = 0; n < *size; n++){
       for(m = 0; m < *size; m++){
          input >> intBuffer;
@@ -77,8 +77,9 @@ void printMatrix(int size, int** matrix){
 int** matrix_multiply(int** matrixA, int** matrixB, int size){
    int** matrixC = new int*[size];
    int product = 0;
-   for(int i = 0; i < size; i++)
+   for(int i = 0; i < size; i++){
       matrixC[i] = new int[size];
+   }
    for(int Ay = 0; Ay < size; Ay++){
       for(int Bx = 0; Bx < size; Bx++){
          product = 0;
