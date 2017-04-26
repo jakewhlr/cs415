@@ -127,6 +127,14 @@ int main(int argc, char* argv[]){
    }
 }
 
+// Shifts the specified column in a split matrix up by one
+//
+//	Input Arguments:
+//    int blockSize - the size of each block that the matrix was split into
+// 	int** matrix - matrix in which the operation will take place
+// 	int col - column that will be shifted up
+// 	int root - square root of size of master matrix
+//    int taskid - id of task that this function is running as
 void shiftUp(int blockSize, int** matrix, int col, int root, int taskid){
    if(taskid == -1){
       int temp = matrix[col][0];
@@ -151,6 +159,14 @@ void shiftUp(int blockSize, int** matrix, int col, int root, int taskid){
    }
 }
 
+// Shifts the specified row in a split matrix left by one
+//
+//	Input Arguments:
+//    int blockSize - the size of each block that the matrix was split into
+// 	int** matrix - matrix in which the operation will take place
+// 	int row - row that will be shifted left
+// 	int root - square root of size of master matrix
+//    int taskid - id of task that this function is running as
 void shiftLeft(int blockSize, int** matrix, int row, int root, int taskid){
    if(taskid == -1){
       int temp = matrix[0][row];

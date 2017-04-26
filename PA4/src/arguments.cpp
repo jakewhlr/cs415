@@ -9,6 +9,11 @@ extern int verbosity;
 extern string fileA;
 extern string fileB;
 
+// Parses command line arguments as specified in README.md
+//
+//	Input Arguments:
+// 	int argc - number or command line arguments passed to main
+// 	char* argv[] - array of command line arguments
 void parseArgs(int argc, char* argv[]){
    using namespace std;
    int length = 0;
@@ -29,7 +34,7 @@ void parseArgs(int argc, char* argv[]){
                         collectingData = true;
                      break;
                      case 's':
-                        if(opt < length) // if s is not last opt
+                        if(opt < length) // if s is not last option
                            if(index + 1 < argc)
                               index++, size = atoi(argv[index]);
                            else

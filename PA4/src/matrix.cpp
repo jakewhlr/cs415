@@ -6,6 +6,11 @@
 
 using namespace std;
 
+// Returns generated matrix (2D int array)
+//
+//	Input Arguments:
+// 	int size - size of matrix to generate, ie. size 12 = 12x12 matrix
+// 	int seed - seed for the RNG to use for number generation
 int** generateMatrix(int size, int seed){
    srand(seed); // initialize RNG
    int** output = new int*[size]; // allocate output
@@ -19,6 +24,12 @@ int** generateMatrix(int size, int seed){
    return output;
 }
 
+// Returns matrix (2D int array) read from file
+//
+//	Input Arguments:
+// 	string filename - name of file to read matrix from
+// Output Arguments:
+//    int* size - returns size of read in array
 int** readFile(string filename, int* size){
    int** output;
    string buffer;
@@ -41,6 +52,11 @@ int** readFile(string filename, int* size){
    return output;
 }
 
+// Prints out specified matrix
+//
+//	Input Arguments:
+// 	int size - size of matrix to print, ie. size 12 = 12x12 matrix
+// 	int** matrix - matrix to be printed
 void printMatrix(int size, int** matrix){
    using namespace std;
    for(int i = 0; i < size; i++){
@@ -52,6 +68,12 @@ void printMatrix(int size, int** matrix){
    cout << endl;
 }
 
+// Returns a matrix, C, which ==  matrixA * matrixB
+//
+//	Input Arguments:
+// 	int** matrixA - first matrix to be used in multiplication
+// 	int** matrixB - second matrix to be used in multiplication
+// 	int size - size of the two matrices to be muliplied, ie. size 12 = 12x12 matrix
 int** matrix_multiply(int** matrixA, int** matrixB, int size){
    int** matrixC = new int*[size];
    int product = 0;
@@ -69,6 +91,12 @@ int** matrix_multiply(int** matrixA, int** matrixB, int size){
    return matrixC;
 }
 
+// Returns a matrix, C, which ==  matrixA + matrixB
+//
+//	Input Arguments:
+// 	int** matrixA - first matrix to be used in addition
+// 	int** matrixB - second matrix to be used in addition
+// 	int size - size of the two matrices to be added, ie. size 12 = 12x12 matrix
 int** matrix_add(int** matrixA, int** matrixB, int size){
    int** matrixC = new int*[size];
    for(int i = 0; i < size; i++){
