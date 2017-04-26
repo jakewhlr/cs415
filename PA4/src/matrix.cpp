@@ -1,7 +1,7 @@
 #include<iostream>
 #include<fstream>
-#include<string>
-#include<vector>
+// #include<string>
+// #include<vector>
 #include<cstdlib>
 
 using namespace std;

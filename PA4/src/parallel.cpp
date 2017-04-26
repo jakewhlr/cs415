@@ -2,8 +2,6 @@
 // PA4 - Matrix Multiplication - Sequential
 
 #include<mpi.h>
-#include<vector>
-#include<ctime>
 #include<cmath>
 #include"matrix.cpp"
 #include"arguments.cpp"
