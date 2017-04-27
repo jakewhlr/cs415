@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -n 1
+#SBATCH -n 4
 #SBATCH --output=output/parallel/parallel.log
 #SBATCH --mail-user=jakewheeler@nevada.unr.edu
 #SBATCH --mail-type=ALL
