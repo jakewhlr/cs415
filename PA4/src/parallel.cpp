@@ -104,7 +104,7 @@ int main(int argc, char* argv[]){
       matrixCprev = matrix_add(matrixCprev, matrix_multiply(sentA, sentB, blockSize), blockSize);
       for(int j = 0; j < size; j++){
          shiftUp(blockSize, sentB, j, root, taskid);
-         shiftLeft(blockSize, sentA, 6, root, taskid);
+         shiftLeft(blockSize, sentA, j, root, taskid);
       }
    }
 
@@ -159,7 +159,7 @@ void shiftUp(int blockSize, int** matrix, int col, int root, int taskid){
    if((col >= (taskid%root)*blockSize) && (col < (taskid%root)*blockSize + blockSize)){ // if col is within task
       int dest = taskid-root;
       if(dest < 0){
-         dest += 2*root;
+         dest = taskid + root;
       }
       MPI_Send(&matrix[0][col%blockSize], 1, MPI_INT, dest, taskid, MPI_COMM_WORLD);
       int i = 0;
