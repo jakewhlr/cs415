@@ -56,7 +56,6 @@ int main(int argc, char* argv[]){
       matrixB = generateMatrix(size, seed+1);
    }
    matrixC = matrix_multiply(matrixA, matrixB, size);
-
    int blockSize = size / sqrt(numtasks); // size of each block
    int** sentA = new int*[blockSize]; // matrix A ints to send/recv
    int** sentB = new int*[blockSize]; // matrix B ints to send/recv
@@ -64,6 +63,10 @@ int main(int argc, char* argv[]){
       sentA[i] = new int[blockSize];
       sentB[i] = new int[blockSize];
    }
+   clock_t start = clock();
+   clock_t substart = clock();
+   clock_t subend;
+   double subtime;
    int root = sqrt(numtasks); // root for splitting up matrix
    if(taskid == 0){ // master node
       for(int task = 1; task < numtasks; task++){ // for each other task
@@ -97,15 +100,15 @@ int main(int argc, char* argv[]){
       }
    }
 
-   clock_t start = clock();
+   substart = clock();
    for(int i = 0; i < size; i++){
-      matrixCprev = matrix_add(matrixCprev, matrix_multiply(sentA, sentB, blockSize), blockSize);
+      // matrixCprev = matrix_add(matrixCprev, matrix_multiply(sentA, sentB, blockSize), blockSize);
+      matrixCprev = matrix_add(sentA, sentB, blockSize);
       for(int j = 0; j < size; j++){
-         shiftUp(blockSize, sentB, j, root, taskid);
-         shiftLeft(blockSize, sentA, j, root, taskid);
+         shiftUp(blockSize, sentB, i, root, taskid);
+         shiftLeft(blockSize, sentA, i, root, taskid);
       }
    }
-
    clock_t end = clock();
    MPI_Barrier(MPI_COMM_WORLD);
    double elapsedTime = (double)(end - start) / CLOCKS_PER_SEC;
