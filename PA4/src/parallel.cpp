@@ -56,8 +56,9 @@ int main(int argc, char* argv[]){
       matrixB = generateMatrix(size, seed+1);
    }
 
-   // matrixC = matrix_multiply(matrixA, matrixB, size);
+   matrixC = matrix_multiply(matrixA, matrixB, size);
 
+   clock_t start = clock();
 
    int blockSize = size / sqrt(numtasks); // size of each block
    int** sentA = new int*[blockSize]; // matrix A ints to send/recv
@@ -98,8 +99,7 @@ int main(int argc, char* argv[]){
          matrixCprev[i][j] = 0;
       }
    }
-
-   clock_t start = clock();
+   start = clock();
    for(int i = 0; i < size; i++){
       matrixCprev = matrix_add(matrixCprev, matrix_multiply(sentA, sentB, blockSize), blockSize);
       for(int j = 0; j < size; j++){
@@ -167,6 +167,7 @@ void shiftUp(int blockSize, int** matrix, int col, int root, int taskid){
          matrix[i][col%blockSize] = matrix[i+1][col%blockSize];
       }
       MPI_Recv(&matrix[i][col%blockSize], 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      cout << taskid << " recieved " << matrix[0][col%blockSize] endl;
    }
 }
 
