@@ -96,12 +96,12 @@ int main(int argc, char* argv[]){
    for(int i = 0; i < size; i++){
       matrixCprev[i] = new int[size];
       for(int j = 0; j < size; j++){
-         matrixC[i][j] = 0;
+         matrixCprev[i][j] = 0;
       }
    }
    start = clock();
    for(int i = 0; i < size; i++){
-      matrixC = matrix_add(matrixC, matrix_multiply(sentA, sentB, blockSize), blockSize);
+      matrixCprev = matrix_add(matrixCprev, matrix_multiply(sentA, sentB, blockSize), blockSize);
       for(int j = 0; j < size; j++){
          shiftUp(blockSize, sentB, j, root, taskid);
          shiftLeft(blockSize, sentA, j, root, taskid);
@@ -162,12 +162,12 @@ void shiftUp(int blockSize, int** matrix, int col, int root, int taskid){
          dest = taskid + root;
       }
       MPI_Send(&matrix[0][col%blockSize], 1, MPI_INT, dest, taskid, MPI_COMM_WORLD);
+      cout << taskid << " sent " << matrix[0][col%blockSize] << " to " << dest << endl;
       int i = 0;
       for(i = 0; i < blockSize-1; i++){
          matrix[i][col%blockSize] = matrix[i+1][col%blockSize];
       }
       MPI_Recv(&matrix[i][col%blockSize], 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      cout << taskid << " recieved " << matrix[0][col%blockSize] endl;
    }
 }
 
