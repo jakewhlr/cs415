@@ -56,9 +56,8 @@ int main(int argc, char* argv[]){
       matrixB = generateMatrix(size, seed+1);
    }
 
-   matrixC = matrix_multiply(matrixA, matrixB, size);
+   // matrixC = matrix_multiply(matrixA, matrixB, size);
 
-   clock_t start = clock();
 
    int blockSize = size / sqrt(numtasks); // size of each block
    int** sentA = new int*[blockSize]; // matrix A ints to send/recv
@@ -100,6 +99,7 @@ int main(int argc, char* argv[]){
       }
    }
 
+   clock_t start = clock();
    for(int i = 0; i < size; i++){
       matrixCprev = matrix_add(matrixCprev, matrix_multiply(sentA, sentB, blockSize), blockSize);
       for(int j = 0; j < size; j++){
