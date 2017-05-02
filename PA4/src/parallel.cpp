@@ -95,13 +95,13 @@ int main(int argc, char* argv[]){
    for(int i = 0; i < size; i++){
       matrixCprev[i] = new int[size];
       for(int j = 0; j < size; j++){
-         matrixCprev[i][j] = 0;
+         matrixC[i][j] = 0;
       }
    }
 
    clock_t start = clock();
    for(int i = 0; i < size; i++){
-      matrixCprev = matrix_add(matrixCprev, matrix_multiply(sentA, sentB, blockSize), blockSize);
+      matrixC = matrix_add(matrixC, matrix_multiply(sentA, sentB, blockSize), blockSize);
       for(int j = 0; j < size; j++){
          shiftUp(blockSize, sentB, j, root, taskid);
          shiftLeft(blockSize, sentA, j, root, taskid);
